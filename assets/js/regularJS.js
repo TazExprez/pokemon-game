@@ -13,7 +13,7 @@ var gameState = {
       attack: 52,
       defense: 43,
       level: 1,
-      img: "http://www.smogon.com/dex/media/sprites/xy/charmander.gif"
+      img: "/img/charmander.gif"
     },
     {
       name: "bulbasaur",
@@ -22,7 +22,7 @@ var gameState = {
       attack: 49,
       defense: 49,
       level: 1,
-      img: "http://www.smogon.com/dex/media/sprites/xy/bulbasaur.gif"
+      img: "/img/bulbasaur.gif"
     },
     {
       name: "squirtle",
@@ -31,7 +31,7 @@ var gameState = {
       attack: 48,
       defense: 65,
       level: 1,
-      img: "http://www.smogon.com/dex/media/sprites/xy/squirtle.gif"
+      img: "/img/squirtle.gif"
     }
   ],
 
