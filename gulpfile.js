@@ -17,7 +17,7 @@ const updateJs = () =>
   gulp
     .src("./assets/js/**/*.js")
     .pipe(concat("regularJS.js"))
-    .pipe(terser())
+    // .pipe(terser())
     .pipe(gulp.dest("./public/js"))
     .pipe(browserSync.stream());
 
