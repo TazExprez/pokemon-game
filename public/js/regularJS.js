@@ -1,3 +1,5 @@
+// debugger;
+
 // This keeps track of the state.
 var gameState = {
   userPokemon: "",
