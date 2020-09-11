@@ -9,6 +9,7 @@ body {
   height: 100vh;
   width: 100%;
   overflow: hidden;
+  // font-family: "Roboto", sans-serif;
 }
 
 /* SELECT SCREEN ============================================================*/
@@ -386,4 +387,46 @@ body {
 
 #battle-screen .cpu img {
   height: 200px;
+}
+
+#winner-screen {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background: url(/img/winner-background.png) no-repeat center bottom;
+  -webkit-background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  -o-background-size: 100% 100%;
+  background-size: 100% 100%;
+}
+
+#winner-screen.active {
+  top: -200vh;
+}
+
+#winner-screen .winner-pokemon {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Bangers", cursive;
+}
+
+#winner-screen .winner-pokemon .winner-message {
+  display: flex;
+  color: yellow;
+  margin: 4rem auto;
+  font-size: 4rem;
+}
+
+#winner-screen .winner-pokemon .winner-message .winner-name {
+  margin: 0 1rem 2rem 0;
+}
+
+#winner-screen .winner-pokemon img {
+  height: 60%;
+  width: 60%;
 }

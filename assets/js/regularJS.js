@@ -42,12 +42,15 @@ var gameState = {
     battleScreenEl: document.getElementById("battle-screen"),
     attackBtnsEl: document
       .getElementById("battle-screen")
-      .querySelectorAll(".attack")
+      .querySelectorAll(".attack"),
+    winnerScreenEl: document.getElementById("winner-screen"),
+    winnerNameEl: document.querySelector(".winner-name"),
+    winnerImgEl: document
+      .querySelector(".winner-pokemon")
+      .getElementsByTagName("img")
   },
 
   init: function () {
-    console.log(gameState.elements.attackBtnsEl);
-
     // This is the initial loop that assigns an onclick event function to each pokemon element.
     var i = 0;
     while (i < gameState.elements.pokemonsEl.length) {
@@ -56,7 +59,7 @@ var gameState = {
         // Here you get the name of the currently selected pokemon and assign it to a variable that will be used to give the game state a value.
         var pokemonName = this.dataset.pokemon;
 
-        // Here you are selecting the elements for the images on the battle screen.  You will manipulate these elements and potentially change the images.  You will directly choose your pokemon, while the CPU will randomly select its pokemon.
+        // Here you are selecting the elements for the images on the battle screen.  You will manipulate these elements and potentially change the images after the Pokemon are chosen by you and the CPU.  You will directly choose your pokemon, while the CPU will randomly select its pokemon.
         var player1Img = document
           .querySelector(".player1")
           .getElementsByTagName("img");
@@ -72,8 +75,6 @@ var gameState = {
 
         // This changes the screen to the battle scene.
         gameState.elements.battleScreenEl.classList.toggle("active");
-
-        // console.log(gameState);
 
         // This selects the data for the current user pokemon object.  Here you are specifically getting an object from the gameState.pokemonDB database array and assigning it to the currentPokemon array.
         gameState.currentPokemon = gameState.pokemonDB.filter(function (
@@ -109,8 +110,6 @@ var gameState = {
         gameState.currentRivalPokemon[0].originalHealth = gameState.calculateInitialHealth(
           gameState.currentRivalPokemon
         );
-
-        console.log(gameState);
       };
 
       i++;
@@ -141,8 +140,6 @@ var gameState = {
   },
 
   attackMove: function (attack, level, stack, critical, enemy, attacker) {
-    console.log(enemy.name + " before: " + enemy.health);
-
     var attackAmount = attack * level * (stack + critical);
 
     enemy.health = enemy.health - attackAmount;
@@ -161,55 +158,45 @@ var gameState = {
       .querySelector(".health-bar")
       .querySelector(".inside");
 
-    // console.log(userHP);
-
     // If enemy.owner == 'user', then we are going to bring down the health of the user visually.  We are already bringing down the health in the background with the other code in the attackmove function.
     if (enemy.owner == "user") {
       var minusPercent = (enemy.health * 100) / enemy.originalHealth;
-      console.log(userHP);
+
       userHP.style.width = (minusPercent < 0 ? 0 : minusPercent) + "%";
     } else {
       var minusPercent = (enemy.health * 100) / enemy.originalHealth;
-      console.log(cpuHP);
+
       cpuHP.style.width = (minusPercent < 0 ? 0 : minusPercent) + "%";
     }
 
     gameState.checkWinner(enemy, attacker);
-
-    console.log(enemy.name + " after: " + enemy.health);
   },
 
   checkWinner: function (enemy, attacker) {
     if (enemy.health <= 0) {
-      console.log("HEY WINNER!" + attacker.name);
+      // This displays the winner's name.
+      gameState.elements.winnerNameEl.innerHTML = attacker.name;
+
+      // This displays the winner's image.
+      gameState.elements.winnerImgEl[0].src = attacker.img;
+
+      // This shows the background for the winner.
+      gameState.elements.winnerScreenEl.classList.toggle("active");
     }
   },
 
   // This function will find a random number from 0 to wherever we want.
-  // This is saved in a global variable, but we will change this below.
-  // function randomNumber(min, max) {
-  //   return Math.floor(Math.random() * (max - min)) + min;
-  // }
   randomNumber: function (min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   },
 
   // The CPU picks the rival pokemon using the random number generator above.
-  // This is saved in a global variable, but we will change this below.
-  // function cpuPick() {
-  // This is going to start at 0 and when it gets to 2 it is going to stop.
-  // gameState.elements.pokemonsEl[randomNumber(0, 3)];
-
-  //   gameState.rivalPokemon = gameState.elements.pokemonsEl[randomNumber(0, 3)].dataset.pokemon;
-  // }
   cpuPick: function () {
     do {
       gameState.rivalPokemon =
         gameState.elements.pokemonsEl[
           gameState.randomNumber(0, 3)
         ].dataset.pokemon;
-
-      console.log("Looping " + gameState.rivalPokemon);
     } while (gameState.userPokemon == gameState.rivalPokemon);
   },
 
