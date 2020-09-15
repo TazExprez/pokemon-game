@@ -43,6 +43,7 @@ var gameState = {
     attackBtnsEl: document
       .getElementById("battle-screen")
       .querySelectorAll(".attack"),
+
     winnerScreenEl: document.getElementById("winner-screen"),
     winnerNameEl: document.querySelector(".winner-name"),
     winnerImgEl: document
@@ -58,6 +59,29 @@ var gameState = {
       gameState.elements.pokemonsEl[i].onclick = function () {
         // Here you get the name of the currently selected pokemon and assign it to a variable that will be used to give the game state a value.
         var pokemonName = this.dataset.pokemon;
+
+        // Here you are selecting the Pokemon's name in the health bar.
+        var player1StatsName = document
+          .querySelector(".player1")
+          .querySelector(".stats")
+          .querySelector(".name")
+          .getElementsByTagName("span");
+        var player2StatsName = document
+          .querySelector(".player2")
+          .querySelector(".stats")
+          .querySelector(".name")
+          .getElementsByTagName("span");
+
+        var player1StatsLevel = document
+          .querySelector(".player1")
+          .querySelector(".stats")
+          .querySelector(".name")
+          .querySelector(".level");
+        var player2StatsLevel = document
+          .querySelector(".player2")
+          .querySelector(".stats")
+          .querySelector(".name")
+          .querySelector(".level");
 
         // Here you are selecting the elements for the images on the battle screen.  You will manipulate these elements and potentially change the images after the Pokemon are chosen by you and the CPU.  You will directly choose your pokemon, while the CPU will randomly select its pokemon.
         var player1Img = document
@@ -83,6 +107,16 @@ var gameState = {
           return pokemon.name == gameState.userPokemon;
         });
 
+        // Here you are setting the Pokemon name in the health bar.
+        player1StatsName[0].innerHTML = gameState.currentPokemon[0].name;
+        player1StatsName[0].innerHTML =
+          player1StatsName[0].innerHTML.charAt(0).toUpperCase() +
+          player1StatsName[0].innerHTML.slice(1);
+
+        // Here you are setting the Pokemon level in the health bar.
+        player1StatsLevel.innerHTML =
+          "Lvl:" + gameState.currentPokemon[0].level;
+
         // Here you are setting the image for the user pokemon from the object inside the currentPokemon array.
         player1Img[0].src = gameState.currentPokemon[0].img;
 
@@ -92,6 +126,16 @@ var gameState = {
         ) {
           return pokemon.name == gameState.rivalPokemon;
         });
+
+        // Here you are setting the Pokemon name in the health bar.
+        player2StatsName[0].innerHTML = gameState.currentRivalPokemon[0].name;
+        player2StatsName[0].innerHTML =
+          player2StatsName[0].innerHTML.charAt(0).toUpperCase() +
+          player2StatsName[0].innerHTML.slice(1);
+
+        // Here you are setting the Pokemon level in the health bar.
+        player2StatsLevel.innerHTML =
+          "Lvl:" + gameState.currentRivalPokemon[0].level;
 
         // Here you are setting the image for the cpu pokemon from the object inside the currentRivalPokemon array.
         player2Img[0].src = gameState.currentRivalPokemon[0].img;
@@ -436,3 +480,63 @@ var gameState = {
   }
 };
 gameState.init();
+
+var arrowUp = document.querySelector(".arrow-up");
+var arrowDown = document.querySelector(".arrow-down");
+var pokemonArray = document.querySelectorAll(".character");
+var currentPokemonSlot = 0;
+var removePokemon = function () {
+  pokemonArray[currentPokemonSlot].style.setProperty("display", "none");
+};
+var displayPokemon = function () {
+  pokemonArray[currentPokemonSlot].style.setProperty("display", "flex");
+};
+
+var selectPokemonMobile = function (direction) {
+  if (direction === "up") {
+    if (currentPokemonSlot === 0) {
+      removePokemon();
+      currentPokemonSlot = pokemonArray.length - 1;
+      displayPokemon();
+    } else {
+      removePokemon();
+      currentPokemonSlot -= 1;
+      displayPokemon();
+    }
+  } else {
+    if (currentPokemonSlot === pokemonArray.length - 1) {
+      removePokemon();
+      currentPokemonSlot = 0;
+      displayPokemon();
+    } else {
+      removePokemon();
+      currentPokemonSlot += 1;
+      displayPokemon();
+    }
+  }
+};
+
+var pokemonNotMobile = function () {
+  if (window.innerWidth >= 768) {
+    for (var i = 0; i < pokemonArray.length; i++) {
+      pokemonArray[i].style.setProperty("display", "flex");
+    }
+  } else {
+    for (var i = 0; i < pokemonArray.length; i++) {
+      if (i === 0) {
+        pokemonArray[i].style.setProperty("display", "flex");
+      } else {
+        pokemonArray[i].style.setProperty("display", "none");
+      }
+    }
+  }
+};
+
+arrowUp.addEventListener("click", function () {
+  selectPokemonMobile("up");
+});
+arrowDown.addEventListener("click", function () {
+  selectPokemonMobile("down");
+});
+
+window.addEventListener("resize", pokemonNotMobile);

@@ -17,50 +17,56 @@
         <div class="title">Choose a Pokemon</div>
       </div>
       <div class="main">
-        <!-- data-pokemon is a data attribute. -->
-        <div class="character charmander" data-pokemon="charmander">
-          <div class="title">Charmander</div>
-          <div
-            style="
-              background: url(/img/charmander.gif) no-repeat center center;
-              -webkit-background-size: 100% 100%;
-              -moz-background-size: 100% 100%;
-              -o-background-size: 100% 100%;
-              background-size: 100% 100%;
-              height: 100px;
-              width: 100px;
-            "
-          ></div>
-        </div>
+        <div class="all-characters">
+          <!-- data-pokemon is a data attribute. -->
+          <div class="character charmander" data-pokemon="charmander">
+            <div class="title">Charmander</div>
+            <div
+              style="
+                background: url(/img/charmander.gif) no-repeat center center;
+                -webkit-background-size: 100% 100%;
+                -moz-background-size: 100% 100%;
+                -o-background-size: 100% 100%;
+                background-size: 100% 100%;
+                height: 100px;
+                width: 100px;
+              "
+            ></div>
+          </div>
 
-        <div class="character bulbasaur" data-pokemon="bulbasaur">
-          <div class="title">Bulbasaur</div>
-          <div
-            style="
-              background: url(/img/bulbasaur.gif) no-repeat center center;
-              -webkit-background-size: 100% 100%;
-              -moz-background-size: 100% 100%;
-              -o-background-size: 100% 100%;
-              background-size: 100% 100%;
-              height: 100px;
-              width: 100px;
-            "
-          ></div>
-        </div>
+          <div class="character bulbasaur" data-pokemon="bulbasaur">
+            <div class="title">Bulbasaur</div>
+            <div
+              style="
+                background: url(/img/bulbasaur.gif) no-repeat center center;
+                -webkit-background-size: 100% 100%;
+                -moz-background-size: 100% 100%;
+                -o-background-size: 100% 100%;
+                background-size: 100% 100%;
+                height: 100px;
+                width: 100px;
+              "
+            ></div>
+          </div>
 
-        <div class="character squirtle" data-pokemon="squirtle">
-          <div class="title">Squirtle</div>
-          <div
-            style="
-              background: url(/img/squirtle.gif) no-repeat center center;
-              -webkit-background-size: 100% 100%;
-              -moz-background-size: 100% 100%;
-              -o-background-size: 100% 100%;
-              background-size: 100% 100%;
-              height: 100px;
-              width: 100px;
-            "
-          ></div>
+          <div class="character squirtle" data-pokemon="squirtle">
+            <div class="title">Squirtle</div>
+            <div
+              style="
+                background: url(/img/squirtle.gif) no-repeat center center;
+                -webkit-background-size: 100% 100%;
+                -moz-background-size: 100% 100%;
+                -o-background-size: 100% 100%;
+                background-size: 100% 100%;
+                height: 100px;
+                width: 100px;
+              "
+            ></div>
+          </div>
+        </div>
+        <div class="mobile-arrows">
+          <img class="arrow-up" src="/img/arrow-up.png" alt="" />
+          <img class="arrow-down" src="/img/arrow-down.png" alt="" />
         </div>
       </div>
     </div>
@@ -71,15 +77,15 @@
       <div class="battle-btns">
         <div class="attack rock" data-attack="rock">
           <img src="/img/rock.png" width="100%" />
-          Rock
+          <span>Rock</span>
         </div>
         <div class="attack paper" data-attack="paper">
           <img src="/img/paper.png" />
-          Paper
+          <span>Paper</span>
         </div>
         <div class="attack scissors" data-attack="scissors">
           <img src="/img/scissors.png" />
-          Scissors
+          <span>Scissors</span>
         </div>
       </div>
 
@@ -87,7 +93,7 @@
         <div class="player1">
           <div class="stats">
             <div class="name">
-              Charmander
+              <span>Charmander</span>
               <div class="level">Lv5</div>
             </div>
 
@@ -106,7 +112,7 @@
         <div class="player2">
           <div class="stats">
             <div class="name">
-              Charmander
+              <span>Charmander</span>
               <div class="level">Lv5</div>
             </div>
 
@@ -128,6 +134,7 @@
           <div class="winner-name">Charmander</div>
           <div class="winner-message-end">Won!</div>
         </div>
+        <a href="index.html"><div class="play-again">Play Again</div></a>
         <img src="/img/charmander.gif" />
       </div>
     </div>
