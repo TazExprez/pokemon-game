@@ -485,13 +485,16 @@ var arrowUp = document.querySelector(".arrow-up");
 var arrowDown = document.querySelector(".arrow-down");
 var pokemonArray = document.querySelectorAll(".character");
 var currentPokemonSlot = 0;
+// This function removes a pokemon from the select screen.
 var removePokemon = function () {
   pokemonArray[currentPokemonSlot].style.setProperty("display", "none");
 };
+// This function adds a pokemon to the select screen.
 var displayPokemon = function () {
   pokemonArray[currentPokemonSlot].style.setProperty("display", "flex");
 };
 
+// This function is basically a carousel that will display or remove a pokemon on the screen when you press the up arrow or the down arrow.  All of the pokemon are in an array and will appear or disappear in order, both backwards and forwards.
 var selectPokemonMobile = function (direction) {
   if (direction === "up") {
     if (currentPokemonSlot === 0) {
@@ -516,6 +519,7 @@ var selectPokemonMobile = function (direction) {
   }
 };
 
+// This function will display all of the pokemon on the select screen together, if the screen width is at least 768 pixels.  If the width is less than 768 pixels, only one pokemon will be displayed at a time, starting with Charmander as the default pokemon.
 var pokemonNotMobile = function () {
   if (window.innerWidth >= 768) {
     for (var i = 0; i < pokemonArray.length; i++) {
@@ -532,6 +536,7 @@ var pokemonNotMobile = function () {
   }
 };
 
+// The following two event listeners contain functions inside of anonymous functions because the functions have arguments.
 arrowUp.addEventListener("click", function () {
   selectPokemonMobile("up");
 });

@@ -469,7 +469,8 @@ body {
   }
 }
 
-@media only screen and (max-width: 767px) {
+// I had to add another media query to take care of cases where the height was less than 848 pixels.
+@media only screen and (max-width: 767px), only screen and (max-height: 848px) {
   .select-screen .main .character.charmander {
     display: flex;
   }
@@ -539,6 +540,7 @@ body {
   }
 
   #battle-screen .player .player1 .stats {
+    top: -60px;
     left: -30px;
     height: 16px;
     width: 135px;
@@ -567,6 +569,7 @@ body {
   }
 
   #battle-screen .cpu .player2 .stats {
+    top: -60px;
     left: 0;
     height: 16px;
     width: 135px;
@@ -592,6 +595,10 @@ body {
 
   #battle-screen .cpu img {
     height: 7rem;
+  }
+
+  #winner-screen .winner-pokemon {
+    padding-bottom: 10%;
   }
 
   #winner-screen .winner-pokemon .winner-message {
